@@ -584,16 +584,15 @@ public:
         }
     }
 
+
     static consteval std::size_t annotationCount()
     {
-        using MetaObject = Class::QStaticMetaObjectData;
-        return annotations_of(^^MetaObject).size();
+        return annotations_of(^^ typename Class::QStaticMetaObjectData).size();
     }
 
     static consteval auto metaObjectAnnotation(auto idx)
     {
-        using StaticMetaObject = Class::QStaticMetaObjectData;
-        constexpr auto info = annotations_of(^^StaticMetaObject).at(idx);
+        constexpr auto info = annotations_of(^^typename Class::QStaticMetaObjectData).at(idx);
         auto result = annotationData<info>();
         result.m_index = idx;
         return result;
