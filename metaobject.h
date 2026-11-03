@@ -959,8 +959,8 @@ public:
                             constexpr auto member = memberFunction(metaData.m_setter);
                             if constexpr (member && parameters_of(*member).size() == 1) {
                                 const QVariant &value = *static_cast<QVariant *>(args[1]);
-                                constexpr auto parameter = parameters_of(*member).at(0);
-                                using paramType = std::remove_cvref_t<decltype([:parameter:])>;
+                                constexpr auto objectType = type_of(parameters_of(*member).at(0));
+                                using paramType = [:remove_cvref(objectType):];
                                 if (value.canConvert<paramType>()) {
                                     object->[:*member:](value.value<paramType>());
                                 }
